@@ -85,6 +85,7 @@ describe('express(1)', function () {
 //        + '    "jade": "~1.11.0",\n'
         + '    "morgan": "~1.6.1",\n'
         + '    "pg": "latest",\n'
+        + '    "chokidar": "latest",\n'
         + '    "passport": "latest",\n'
         + '    "passport-local": "latest",\n'
         + '    "serve-favicon": "~2.3.0"\n'
