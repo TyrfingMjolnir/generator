@@ -72,7 +72,7 @@ describe('express(1)', function () {
       var contents = fs.readFileSync(file, 'utf8');
       assert.equal(contents, '{\n'
         + '  "name": ' + JSON.stringify(path.basename(dir)) + ',\n'
-        + '  "version": "0.0.0",\n'
+        + '  "version": "6.6.7",\n'
         + '  "private": true,\n'
         + '  "scripts": {\n'
         + '    "start": "node ./bin/www"\n'
@@ -82,8 +82,11 @@ describe('express(1)', function () {
         + '    "cookie-parser": "~1.3.5",\n'
         + '    "debug": "~2.2.0",\n'
         + '    "express": "~4.13.1",\n'
-        + '    "jade": "~1.11.0",\n'
+//        + '    "jade": "~1.11.0",\n'
         + '    "morgan": "~1.6.1",\n'
+        + '    "pg": "latest",\n'
+        + '    "passport": "latest",\n'
+        + '    "passport-local": "latest",\n'
         + '    "serve-favicon": "~2.3.0"\n'
         + '  }\n'
         + '}');
