@@ -112,53 +112,58 @@ function createApplication(app_name, path) {
 
   mkdir(path, function(){
     mkdir(path + '/public');
-    mkdir(path + '/public/javascripts');
+    mkdir(path + '/public/javascript');
     mkdir(path + '/public/images');
-    mkdir(path + '/public/stylesheets', function(){
+    mkdir(path + '/public/stylesheet', function(){
       switch (program.css) {
         case 'less':
-          write(path + '/public/stylesheets/style.less', less);
+          write(path + '/public/stylesheet/style.less', less);
           break;
         case 'stylus':
-          write(path + '/public/stylesheets/style.styl', stylus);
+          write(path + '/public/stylesheet/style.styl', stylus);
           break;
         case 'compass':
-          write(path + '/public/stylesheets/style.scss', compass);
+          write(path + '/public/stylesheet/style.scss', compass);
           break;
         case 'sass':
-          write(path + '/public/stylesheets/style.sass', sass);
+          write(path + '/public/stylesheet/style.sass', sass);
           break;
         default:
-          write(path + '/public/stylesheets/style.css', css);
+          write(path + '/public/stylesheet/style.css', css);
       }
       complete();
     });
 
-    mkdir(path + '/routes', function(){
-      write(path + '/routes/index.js', index);
-      write(path + '/routes/users.js', users);
+    mkdir(path + '/route', function(){
+      write(path + '/route/index.js', index);
+      write(path + '/route/users.js', users);
       complete();
     });
 
-    mkdir(path + '/views', function(){
+    mkdir(path + '/view', function(){
       switch (program.template) {
         case 'ejs':
-          copy_template('ejs/index.ejs', path + '/views/index.ejs');
-          copy_template('ejs/error.ejs', path + '/views/error.ejs');
+          copy_template('ejs/index.ejs', path + '/view/index.ejs');
+          copy_template('ejs/error.ejs', path + '/view/error.ejs');
           break;
         case 'jade':
-          copy_template('jade/index.jade', path + '/views/index.jade');
-          copy_template('jade/layout.jade', path + '/views/layout.jade');
-          copy_template('jade/error.jade', path + '/views/error.jade');
+          copy_template('jade/index.jade', path + '/view/index.jade');
+          copy_template('jade/layout.jade', path + '/view/layout.jade');
+          copy_template('jade/error.jade', path + '/view/error.jade');
+          break;
+        case 'ng':
+          copy_template('ng/index.jade', path + '/view/index.jade');
+          copy_template('ng/layout.jade', path + '/view/layout.jade');
+          copy_template('ng/error.jade', path + '/view/error.jade');
           break;
         case 'hjs':
-          copy_template('hogan/index.hjs', path + '/views/index.hjs');
-          copy_template('hogan/error.hjs', path + '/views/error.hjs');
+          copy_template('hogan/index.hjs', path + '/view/index.hjs');
+          copy_template('hogan/error.hjs', path + '/view/error.hjs');
           break;
         case 'hbs':
-          copy_template('hbs/index.hbs', path + '/views/index.hbs');
-          copy_template('hbs/layout.hbs', path + '/views/layout.hbs');
-          copy_template('hbs/error.hbs', path + '/views/error.hbs');
+          copy_template('hbs/index.hbs', path + '/view/index.hbs');
+          copy_template('hbs/layout.hbs', path + '/view/layout.hbs');
+          copy_template('hbs/error.hbs', path + '/view/error.hbs');
           break;
       }
       complete();
@@ -183,12 +188,12 @@ function createApplication(app_name, path) {
     }
 
     // Template support
-    app = app.replace('{views}', program.template);
+    app = app.replace('{view}', program.template);
 
     // package.json
     var pkg = {
         name: app_name
-      , version: '0.0.0'
+      , version: '6.6.7'
       , private: true
       , scripts: { start: 'node ./bin/www' }
       , dependencies: {
@@ -213,6 +218,8 @@ function createApplication(app_name, path) {
         break;
       case 'hbs':
         pkg.dependencies['hbs'] = '~3.1.0';
+        break;
+      case 'ng':
         break;
       default:
     }
@@ -247,7 +254,7 @@ function createApplication(app_name, path) {
     });
 
     if (program.git) {
-      write(path + '/.gitignore', fs.readFileSync(__dirname + '/../templates/js/gitignore', 'utf-8'));
+      write(path + '/.gitignore', fs.readFileSync(__dirname + '/../template/js/gitignore', 'utf-8'));
     }
 
     complete();
