@@ -100,8 +100,8 @@ function createApplication(app_name, path) {
   // JavaScript
   var app = loadTemplate('js/app.js');
   var www = loadTemplate('js/www');
-  var index = loadTemplate('js/routes/index.js');
-  var users = loadTemplate('js/routes/users.js');
+  var index = loadTemplate('js/route/index.js');
+  var users = loadTemplate('js/route/users.js');
 
   // CSS
   var css = loadTemplate('css/style.css');
@@ -262,7 +262,7 @@ function createApplication(app_name, path) {
 }
 
 function copy_template(from, to) {
-  from = path.join(__dirname, '..', 'templates', from);
+  from = path.join(__dirname, '..', 'template', from);
   write(to, fs.readFileSync(from, 'utf-8'));
 }
 
@@ -320,7 +320,7 @@ function launchedFromCmd() {
  */
 
 function loadTemplate(name) {
-  return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
+  return fs.readFileSync(path.join(__dirname, '..', 'template', name), 'utf-8');
 }
 
 /**
